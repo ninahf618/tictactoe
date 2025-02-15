@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="../static/style.css">
+<body>
+    <h1>Tic-Tac-Toe</h1>
+    {% if winner %}
+        <h2>{{ "It's a Tie!" if winner == "Tie" else winner + " Wins!" }}</h2>
+        <a href="{{ url_for('reset') }}" class="reset-button">Play Again</a>
+    {% else %}
+        <h2>Current Player: {{ current_player }}</h2>
+        <form method="POST">
+            <table>
+                {% for i in range(3) %}
+                <tr>
+                    {% for j in range(3) %}
+                    <td>
+                        {% if board[i][j] == '' %}
+                            <button type="submit" name="position" value="{{ i }}-{{ j }}"></button>
+                        {% else %}
+                            {{ board[i][j] }}
+                        {% endif %}
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+        </form>
+    {% endif %}
+</body>
+</html>
